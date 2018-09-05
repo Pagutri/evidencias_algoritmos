@@ -7,9 +7,7 @@
 #include <math.h>
 #include <time.h>
 
-#include "simple_random.h"
 #include "output.h"
-#include "parsing.h"
 #include "adp_merge.h"
 
 

@@ -14,7 +14,7 @@ elementos en S cuya suma sea exactamente x.
 
 El programa espera un input tal como se
 describe en la página correspondiente de
-CodeChef
+CodeChef.
 
 
 Instrucciones:

@@ -21,40 +21,10 @@ unsigned int n;
 int *S;
 int x;
 
-n = scanf("%i", &n);
-
-allocate_uintarray(&array, n);
-
-for(repeat = 0; repeat < repeats; repeat++)
-  {
-  randomize_uintarray(array, N, N);
-
-  if(N <= VERBOSE_N)
-    {
-    printf("\nRepetition %d of %d:\n\n", repeat + 1, repeats);
-    print_uintarray(array, N);
-    }
-
-  operations = merge_sort(array, N);
-
-  if(N <= VERBOSE_N)
-    {
-    print_uintarray(array, N);
-    }
-  }
-    
-if(1 == repeats)
-  {
-  printf("The Merge Sort took %u operation(s).\n"\
-         "%u log_2 (%u) = %.1f\n\n", operations,\
-         N, N, ((double)N) * log((double)N) / log(2.0) );
-  }
-else
-  {
-  printf("Every one of the %u Merge Sorts took %u operations.\n"\
-         "%u log_2 (%u) = %.1f\n\n", repeats, operations,\
-         N, N, ((double)N) * log((double)N) / log(2.0) );
-  }
+scanf("%i", &n);
+allocate_uintarray(&S, n);
+save_array(S, n);
+scanf("%i", &x);
 
 return(1);
 }
@@ -75,23 +45,14 @@ return(N);
 
 
 
-unsigned int randomize_uintarray(unsigned int *array,\
-                                 unsigned int arraylen,\
-                                 unsigned int randmax)
+void save_array(int *array, unsigned int arraylen)
 {
-/*
- * Fills the array with random numbers from [0, randmax),
- * that is: 0 inclusive, randmax exclusive.
- *
- */
 unsigned int i;
 
 for(i = 0; i < arraylen; i++)
   {
-  array[i] = rand_zero_n(randmax);
+  scanf("%i", array + i);
   }
-
-return(i+1);
 }
 
 
