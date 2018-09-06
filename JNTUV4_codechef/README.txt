@@ -4,7 +4,7 @@ Universidad de Guanajuato
 gutierrezrs2015@licifug.ugto.mx
 
 Implementación del problema 2.3-7 del libro
-'Introduction to algorithms' y JNTV4 de
+'Introduction to algorithms' y JNTUV4 de
 CodeChef.
 
 Este algoritmo es una adaptación del merge
