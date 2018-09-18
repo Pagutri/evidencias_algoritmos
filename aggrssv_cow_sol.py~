@@ -3,8 +3,8 @@ import fileinput
 def get_min_dist(locations, cows):
     locations.sort()
     n = len(locations)
-    lo = locations[1] - locations[0] # Distancia minima entre casetas
-    hi = locations[n - 1] - locations[0] # Distancia maxima entre casetas
+    lo = locations[1] - locations[0] # Distancia mínima entre casetas
+    hi = locations[n - 1] - locations[0] # Distancia máxima entre casetas
     
     while lo + 1 < hi:
         x = lo + (hi - lo) // 2
@@ -26,7 +26,6 @@ def get_min_dist(locations, cows):
 
 
 stalls = []
-num_stalls = 1
 
 for line in fileinput.input():
     if fileinput.isfirstline():
@@ -40,6 +39,6 @@ for line in fileinput.input():
         
     if len(stalls) == num_stalls:
         print(get_min_dist(stalls, num_cows))
-        stalls = []
+        pos_stalls = []
 
 
