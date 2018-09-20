@@ -5,6 +5,8 @@ import fileinput
 
 def num_decod(encryption):
     m = len(encryption)
+    encryption = encryption[:m - 1] # Quitar el salto de linea
+    m -= 1
     N = []
     
     if m == 1 or (m == 2 and int(encryption[0] + encryption[1]) > 26):
