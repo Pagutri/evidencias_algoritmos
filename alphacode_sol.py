@@ -9,20 +9,25 @@ def num_decod(encryption):
     m -= 1
     N = []
     
-    if m == 1 or (m == 2 and int(encryption[0] + encryption[1]) > 26):
+    if m == 1 or (m == 2 and (int(encryption[0] + encryption[1]) > 26 or \
+        int(encryption[1]) == 0)):
         return 1
-    elif m == 2 and int(encryption[0] + encryption[1]) <= 26:
+    elif m == 2:
         return 2
     else:
         N.append(1)
         
-        if int(encryption[0] + encryption[1]) > 26:
+        if int(encryption[0] + encryption[1]) > 26 or int(encryption[1]) == 0:
             N.append(1)
         else:
             N.append(2)
         
         for i in range(2, m):
-            if int(encryption[i - 1] + encryption[i]) > 26:
+            if int(encryption[i - 1] + encryption[i]) > 26 or \
+            int(encryption[i]) == 0 or int(encryption[i - 1]) == 0:
+                N.append(N[i - 1])
+            elif int(encryption[i - 1] + encryption[i]) <= 26 and \
+            i + 1 < m and int(encryption[i + 1]) == 0:
                 N.append(N[i - 1])
             else:
                 N.append(N[i - 1] + N[i - 2])
