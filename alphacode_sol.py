@@ -1,40 +1,43 @@
 import fileinput
 from numpy import zeros
 
-# Asume que encryption es tipo string y que no hay encriptaciones no permitidas
-
-def memoized_N(i, chain, N):
-    if i == 0:
-        return 1
-    elif i == 1 and (int(chain[0] + chain[1]) > 26 or \
-        int(chain[1]) == 0):
-        N[i] = 1
-        return N[i]
-    elif i == 1:
-        N[i] = 2
-        return N[i]
-    else:
-        if int(chain[i - 1] + chain[i]) > 26:
-            if N[i - 1] == 0:
-                N[i - 1] = memoized_N(i - 1, chain, N)
-            return N[i - 1]
-        elif int(chain[i]) == 0:
-            if N[i - 2] == 0:
-                N[i - 2] = memoized_N(i - 2, chain, N)
-            return N[i - 2]
-        else:
-            if N[i - 1] == 0:
-                N[i - 1] = memoized_N(i - 1, chain, N)
-            if N[i - 2] == 0:
-                N[i - 2] = memoized_N(i - 2, chain, N)
-            return N[i - 1] + N[i - 2]
+# Esta es la funcion que encuentra el numero de decodificaciones posibles
+# Asume que encryption es tipo string
 
 def num_decod(encryption):
     m = len(encryption)
-    N = zeros(m, dtype = int)
-    N[0] = 1
+    N = []
     
-    return memoized_N(m - 1, encryption, N)
+    if m == 1 or (m == 2 and (int(encryption[0] + encryption[1]) > 26 or \
+        int(encryption[1]) == 0)):
+        return 1
+    elif m == 2:
+        return 2
+    else:
+        N.append(1)
+        
+        if int(encryption[0] + encryption[1]) > 26 or int(encryption[1]) == 0:
+            N.append(1)
+        else:
+            N.append(2)
+        
+        for i in range(2, m):
+            if int(encryption[i - 1] + encryption[i]) > 26 or \
+               int(encryption[i - 1] + encryption[i]) <= 10:
+                N.append(N[i - 1])
+            else:
+                N.append(N[i - 1] + N[i - 2])
+            
+            if int(encryption[i]) == 0 and int(encryption[i - 2] + encryption[i - 1]) <= 26:
+                if i > 2:
+                    N[i] -= N[i - 3]
+                    N[i - 1] = N[i]
+                else:
+                    N[i - 1] -= N[i - 2]
+                    N[i] = N[i - 1]
+    
+    print(N)
+    return N[m - 1]
 
 # Aqui empieza el programa
 
