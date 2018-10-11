@@ -13,6 +13,8 @@ pyautogui.PAUSE = 2.5
 pyautogui.FAILSAFE = True
 
 # move mouse to XY coordinates over num_second seconds
+# The None value can be passed for a coordinate to mean 
+# “the current mouse cursor position”
 pyautogui.moveTo(x, y, duration=num_seconds)
 # move mouse relative to its current position
 pyautogui.moveRel(xOffset, yOffset, duration=num_seconds)
